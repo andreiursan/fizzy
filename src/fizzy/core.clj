@@ -1,16 +1,17 @@
 (ns fizzy.core
   (:gen-class))
 
+(def triple? (comp zero? #(mod % 3)))
+(def quintuple? (comp zero? #(mod % 5)))
+
 (defn fizz-buzz [n]
-  (let [mod3? (zero? (mod n 3))
-        mod5? (zero? (mod n 5))]
-    (case [mod3? mod5?]
-      [true false] "fizz"
-      [false true] "buzz"
-      [true true] "fizzbuzz"
-      n)))
+  (case [(triple? n) (quintuple? n)]
+    [true false] "fizz"
+    [false true] "buzz"
+    [true true] "fizzbuzz"
+    n))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Fizz buzz first 100"
   [& args]
-  (println "Hello, World!"))
+  (map fizz-buzz (range 1 101)))
