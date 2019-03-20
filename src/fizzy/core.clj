@@ -5,6 +5,7 @@
 (def quintuple? (comp zero? #(mod % 5)))
 
 (defn fizz-buzz [n]
+  {:pre [(number? n)]}
   (case [(triple? n) (quintuple? n)]
     [true false] "fizz"
     [false true] "buzz"
